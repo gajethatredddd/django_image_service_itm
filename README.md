@@ -1,18 +1,34 @@
 Микросервис для загрузки, просмотра и удаления изображений на Django с Docker и PostgreSQL.
 
-1. Склонируй проект
-   git clone https://github.com/gajethatredddd/django_image_service.git
-   cd django_image_service
-2. Настрой окружение
-   Скопируй пример настроек
-    cp .env.example .env
-3. Запусти проект
-   docker compose up -d --build
-4. Примени миграции
+Через setup.sh :
+
+# 1. Скачай проект
+git clone https://github.com/gajethatredddd/django_image_service.git
+
+cd django_image_service
+
+# 2. Запусти автоматическую установку
+./setup.sh
+
+Руками: 
+
+# 1. Скачай проект
+git clone https://github.com/gajethatredddd/django_image_service.git
+cd django_image_service
+
+# 2. Настрой окружение
+cp .env.example .env
+
+# 3. Запусти проект
+docker compose up -d --build
+
+# 4. Настрой базу данных
 docker compose exec web python django_app/manage.py migrate
-5. Создай суперпользователя 
+
+# 5. Создай администратора (опционально)
 docker compose exec web python django_app/manage.py createsuperuser
-6. Открой в браузере
+
+# 6. Открой в браузере
      Приложение: http://localhost:8000
 
      Админка: http://localhost:8000/admin
