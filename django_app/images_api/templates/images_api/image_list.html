@@ -1,0 +1,44 @@
+{% extends 'images_api/base.html' %}
+
+{% block title %}All Images - Image Service{% endblock %}
+
+{% block content %}
+<h1 class="mb-4">🖼️ All Images</h1>
+
+{% if images %}
+    <div class="row">
+        {% for image in images %}
+        <div class="col-md-4 mb-4">
+            <div class="card h-100 shadow-sm">
+                <img src="{{ image.path.url }}" class="card-img-top" alt="{{ image.name }}">
+                <div class="card-body d-flex flex-column">
+                    <h5 class="card-title">{{ image.name }}</h5>
+                    <p class="card-text flex-grow-1">
+                        <small class="text-muted">
+                            📏 Size: {{ image.size|filesizeformat }}<br>
+                            📅 Uploaded: {{ image.date|date:"M d, Y H:i" }}
+                        </small>
+                    </p>
+                    <div class="mt-auto">
+                        <a href="{% url 'images_api:image_detail' image.pk %}" class="btn btn-info btn-sm">👁️ View</a>
+                        <form method="post" action="{% url 'images_api:image_delete' image.pk %}" style="display: inline;">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-danger btn-sm" 
+                                    onclick="return confirm('Are you sure you want to delete {{ image.name }}?');">
+                                🗑️ Delete
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+{% else %}
+    <div class="text-center py-5">
+        <h3 class="text-muted">No images yet</h3>
+        <p class="text-muted">Upload your first image to get started!</p>
+        <a href="{% url 'images_api:image_upload' %}" class="btn btn-primary btn-lg">⬆️ Upload First Image</a>
+    </div>
+{% endif %}
+{% endblock %}

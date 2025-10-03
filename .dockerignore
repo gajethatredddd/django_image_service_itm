@@ -1,0 +1,7 @@
+db_data/
+.git/
+.venv/
+.env
+*.pyc
+__pycache__/
+*.sqlite3

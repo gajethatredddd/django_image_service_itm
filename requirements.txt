@@ -1,0 +1,6 @@
+Django>=4.2, <5.0
+psycopg2-binary>=2.9.0
+Pillow>=10.0.0
+gunicorn>=21.0.0
+django-environ>=0.10.0
+coverage>=7.0.0
