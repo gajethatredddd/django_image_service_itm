@@ -13,7 +13,8 @@ cd django_image_service
 Руками: 
 
 # 1. Скачай проект
-git clone https://github.com/gajethatredddd/django_image_service.git
+git clone https://github.com/gajethatredddd/django_image_service_itm.git
+
 cd django_image_service
 
 # 2. Настрой окружение
