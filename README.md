@@ -1,9 +1,14 @@
 Микросервис для загрузки, просмотра и удаления изображений на Django с Docker и PostgreSQL.
 
+Для Windows :
+
+Просто запусти батник, но должен быть установлен Docker Desktop и запущен и гит для виндовс
+
+
 Через setup.sh :
 
 # 1. Скачай проект
-git clone https://github.com/gajethatredddd/django_image_service.git
+git clone https://github.com/gajethatredddd/django_image_service_itm.git
 
 cd django_image_service
 
@@ -13,7 +18,8 @@ cd django_image_service
 Руками: 
 
 # 1. Скачай проект
-git clone https://github.com/gajethatredddd/django_image_service.git
+git clone https://github.com/gajethatredddd/django_image_service_itm.git
+
 cd django_image_service
 
 # 2. Настрой окружение
