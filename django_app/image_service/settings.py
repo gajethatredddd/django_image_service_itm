@@ -2,14 +2,13 @@ import os
 from pathlib import Path
 import environ
 
-# Инициализируем environ
 env = environ.Env()
 environ.Env.read_env(os.path.join(Path(__file__).resolve().parent.parent.parent, '.env'))
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-SECRET_KEY = env('SECRET_KEY')
-DEBUG = env.bool('DEBUG', default=False)
+SECRET_KEY = env('SECRET_KEY', default='fallback-secret-key-change-in-production')
+DEBUG = env.bool('DEBUG', default=True)
 
 ALLOWED_HOSTS = ['localhost', '127.0.0.1', '0.0.0.0', 'web']
 
@@ -56,11 +55,11 @@ WSGI_APPLICATION = 'image_service.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': env('DB_NAME'),
-        'USER': env('DB_USER'),
-        'PASSWORD': env('DB_PASSWORD'),
-        'HOST': env('DB_HOST'),
-        'PORT': env('DB_PORT'),
+        'NAME': env('DB_NAME', default='image_db'),
+        'USER': env('DB_USER', default='postgres'),
+        'PASSWORD': env('DB_PASSWORD', default='postgres'),
+        'HOST': env('DB_HOST', default='db'),
+        'PORT': env('DB_PORT', default='5432'),
     }
 }
 
@@ -69,6 +68,7 @@ TIME_ZONE = 'UTC'
 USE_I18N = True
 USE_TZ = True
 
+# ГАРАНТИРОВАННО ПРАВИЛЬНЫЕ ПУТИ
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATICFILES_DIRS = [
@@ -76,11 +76,10 @@ STATICFILES_DIRS = [
 ]
 
 MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR.parent.parent, "media")
+MEDIA_ROOT = '/app/media'  # АБСОЛЮТНЫЙ ПУТЬ В КОНТЕЙНЕРЕ
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-# Логирование
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
