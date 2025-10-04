@@ -1,13 +1,11 @@
 {% extends 'images_api/base.html' %}
 
-{% block title %}Upload Image - Image Service{% endblock %}
-
 {% block content %}
 <div class="row justify-content-center">
     <div class="col-md-8">
-        <h1 class="mb-4">⬆️ Upload New Image</h1>
+        <h1 class="mb-4">Upload New Image</h1>
         
-        <div class="card shadow">
+        <div class="card">
             <div class="card-body">
                 <form method="post" enctype="multipart/form-data" novalidate>
                     {% csrf_token %}
@@ -28,8 +26,8 @@
                     {% endfor %}
 
                     <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                        <a href="{% url 'images_api:image_list' %}" class="btn btn-secondary me-md-2">← Back to List</a>
-                        <button type="submit" class="btn btn-success">🚀 Upload Image</button>
+                        <a href="{% url 'images_api:image_list' %}" class="btn btn-secondary me-md-2">Back to List</a>
+                        <button type="submit" class="btn btn-success">Upload Image</button>
                     </div>
                 </form>
             </div>
@@ -46,16 +44,4 @@
         </div>
     </div>
 </div>
-
-<style>
-    .form-control {
-        border: 2px solid #e9ecef;
-        border-radius: 0.375rem;
-        padding: 0.75rem;
-    }
-    .form-control:focus {
-        border-color: #86b7fe;
-        box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
-    }
-</style>
 {% endblock %}
