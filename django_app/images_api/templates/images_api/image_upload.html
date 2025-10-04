@@ -3,7 +3,7 @@
 {% block content %}
 <div class="row justify-content-center">
     <div class="col-md-8">
-        <h1 class="mb-4">Upload New Image</h1>
+        <h1 class="mb-4">Загрузка</h1>
         
         <div class="card">
             <div class="card-body">
@@ -26,15 +26,15 @@
                     {% endfor %}
 
                     <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                        <a href="{% url 'images_api:image_list' %}" class="btn btn-secondary me-md-2">Back to List</a>
-                        <button type="submit" class="btn btn-success">Upload Image</button>
+                        <a href="{% url 'images_api:image_list' %}" class="btn btn-secondary me-md-2">На главную</a>
+                        <button type="submit" class="btn btn-success">Загрузить</button>
                     </div>
                 </form>
             </div>
         </div>
 
         <div class="mt-4">
-            <h5>Supported formats:</h5>
+            <h5>Поддерживаемые форматы:</h5>
             <ul>
                 <li>JPEG (.jpg, .jpeg)</li>
                 <li>PNG (.png)</li>

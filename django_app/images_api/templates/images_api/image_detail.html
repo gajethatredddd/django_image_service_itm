@@ -15,24 +15,24 @@
     <div class="col-md-4">
         <div class="card">
             <div class="card-header">
-                <h5 class="card-title mb-0">Image Details</h5>
+                <h5 class="card-title mb-0">Детали</h5>
             </div>
             <div class="card-body">
                 <ul class="list-group list-group-flush">
                     <li class="list-group-item d-flex justify-content-between">
-                        <span><strong>Name:</strong></span>
+                        <span><strong>Название:</strong></span>
                         <span>{{ image.name }}</span>
                     </li>
                     <li class="list-group-item d-flex justify-content-between">
-                        <span><strong>Size:</strong></span>
+                        <span><strong>Размер:</strong></span>
                         <span>{{ image.size|filesizeformat }}</span>
                     </li>
                     <li class="list-group-item d-flex justify-content-between">
-                        <span><strong>Uploaded:</strong></span>
+                        <span><strong>Загружено:</strong></span>
                         <span>{{ image.date|date:"M d, Y H:i" }}</span>
                     </li>
                     <li class="list-group-item">
-                        <strong>Path in DB:</strong><br>
+                        <strong>Путь в БД:</strong><br>
                         <code class="small">{{ image.path }}</code>
                     </li>
                 </ul>
@@ -42,12 +42,12 @@
         <div class="card mt-4">
             <div class="card-body">
                 <div class="d-grid gap-2">
-                    <a href="{% url 'images_api:image_list' %}" class="btn btn-primary">Back to List</a>
+                    <a href="{% url 'images_api:image_list' %}" class="btn btn-primary">На главную</a>
                     <form method="post" action="{% url 'images_api:image_delete' image.pk %}">
                         {% csrf_token %}
                         <button type="submit" class="btn btn-danger w-100" 
                                 onclick="return confirm('Are you sure you want to delete {{ image.name }}?');">
-                            Delete Image
+                            Удалить картинку
                         </button>
                     </form>
                 </div>

@@ -1,7 +1,7 @@
 {% extends 'images_api/base.html' %}
 
 {% block content %}
-<h1 class="mb-4">All Images</h1>
+<h1 class="mb-4">Все картинки</h1>
 {% if images %}
     <div class="row">
         {% for image in images %}
@@ -12,14 +12,14 @@
                     <h5 class="card-title">{{ image.name }}</h5>
                     <p class="card-text">
                         <small class="text-muted">
-                            Size: {{ image.size|filesizeformat }}<br>
-                            Uploaded: {{ image.date|date:"M d, Y H:i" }}
+                            Размер: {{ image.size|filesizeformat }}<br>
+                            Загружено: {{ image.date|date:"M d, Y H:i" }}
                         </small>
                     </p>
-                    <a href="{% url 'images_api:image_detail' image.pk %}" class="btn btn-info btn-sm">View</a>
+                    <a href="{% url 'images_api:image_detail' image.pk %}" class="btn btn-info btn-sm">Просмотр</a>
                     <form method="post" action="{% url 'images_api:image_delete' image.pk %}" style="display: inline;">
                         {% csrf_token %}
-                        <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure?');">Delete</button>
+                        <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure?');">Удалить</button>
                     </form>
                 </div>
             </div>
