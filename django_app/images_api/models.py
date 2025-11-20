@@ -6,6 +6,7 @@ class Image(models.Model):
     path = models.ImageField(upload_to='images/')
     size = models.PositiveIntegerField(default=0)
     date = models.DateTimeField(auto_now_add=True)
+    extracted_text = models.TextField(blank=True, null=True)
 
     def save(self, *args, **kwargs):
         super().save(*args, **kwargs)
@@ -14,9 +15,8 @@ class Image(models.Model):
             super().save(update_fields=['size'])
 
     def delete(self, *args, **kwargs):
-        if self.path:
-            if os.path.isfile(self.path.path):
-                os.remove(self.path.path)
+        if self.path and os.path.isfile(self.path.path):
+            os.remove(self.path.path)
         super().delete(*args, **kwargs)
 
     def __str__(self):

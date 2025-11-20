@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Отправка текста и картинки на email</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: #333;
+        }
+        input[type="number"], input[type="email"] {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #ddd;
+            border-radius: 6px;
+            font-size: 16px;
+            box-sizing: border-box;
+        }
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        input[type="checkbox"] {
+            width: 20px;
+            height: 20px;
+        }
+        button {
+            background: #007bff;
+            color: white;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 16px;
+            width: 100%;
+            transition: background 0.3s;
+        }
+        button:hover {
+            background: #0056b3;
+        }
+        button:disabled {
+            background: #6c757d;
+            cursor: not-allowed;
+        }
+        .info-box {
+            margin-top: 30px;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 6px;
+            border-left: 4px solid #007bff;
+        }
+        #available-ids {
+            margin-top: 15px;
+            padding: 15px;
+            background: #e9ecef;
+            border-radius: 6px;
+            font-size: 14px;
+        }
+        .loading { color: #6c757d; }
+        .success { color: #28a745; font-weight: bold; }
+        .error { color: #dc3545; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 style="text-align: center; color: #333; margin-bottom: 30px;">📧 Отправить текст и картинку на email</h1>
+
+        <form method="post" action="/api/v1/emails/form-submit" autocomplete="off" id="emailForm">
+            <div class="form-group">
+                <label for="item_id">🔢 ID картинки:</label>
+                <input type="number" id="item_id" name="item_id" placeholder="Введите ID из списка ниже" required min="1">
+            </div>
+
+            <div class="form-group">
+                <label for="email_to">📧 Email получателя:</label>
+                <input type="email" id="email_to" name="email_to" placeholder="example@gmail.com" required>
+            </div>
+
+            <div class="form-group">
+                <div class="checkbox-group">
+                    <input type="checkbox" id="include_image" name="include_image" value="true" checked>
+                    <label for="include_image" style="margin: 0;">📎 Отправить картинку вложением</label>
+                </div>
+            </div>
+
+            <button type="submit" id="submitBtn">Отправить</button>
+        </form>
+
+        <div class="info-box">
+            <h3 style="margin-top: 0;">📊 Доступные ID изображений:</h3>
+            <button type="button" onclick="loadAvailableIds()" style="width: auto; padding: 8px 16px; margin-bottom: 10px;">
+                🔄 Обновить список
+            </button>
+            <div id="available-ids" class="loading">
+                Нажми "Обновить список" чтобы увидеть доступные ID
+            </div>
+        </div>
+    </div>
+
+    <script>
+    async function loadAvailableIds() {
+        const container = document.getElementById('available-ids');
+        container.innerHTML = '<span class="loading">🔍 Загружаем список ID...</span>';
+
+        try {
+            const response = await fetch('/api/v1/emails/available-ids');
+            const data = await response.json();
+
+            if (data.available_ids && data.available_ids.length > 0) {
+                const ids = data.available_ids.map(id =>
+                    `<span style="display: inline-block; margin: 2px; padding: 4px 8px; background: #28a745; color: white; border-radius: 4px;">${id}</span>`
+                ).join(' ');
+
+                container.innerHTML = `<div class="success">✅ Доступные ID:</div><div style="margin-top: 10px;">${ids}</div>`;
+            } else {
+                container.innerHTML = '<span class="error">❌ Нет доступных изображений в системе</span>';
+            }
+        } catch (error) {
+            container.innerHTML = '<span class="error">❌ Ошибка загрузки списка ID</span>';
+        }
+    }
+
+    window.onload = loadAvailableIds;
+    </script>
+</body>
+</html>

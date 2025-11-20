@@ -1,0 +1,16 @@
+Django>=4.2, <5.0
+djangorestframework
+psycopg2-binary>=2.9.0
+Pillow>=10.0.0
+gunicorn>=21.0.0
+django-environ>=0.10.0
+coverage>=7.0.0
+django-prometheus
+redis
+django-redis
+geoip2
+djangorestframework-simplejwt
+pytesseract>=0.3.10
+Pillow>=10.0.0
+pytest
+celery>=5.3
